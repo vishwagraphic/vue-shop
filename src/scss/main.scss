@@ -1,0 +1,45 @@
+.logo-img{
+    animation: App-logo-spin infinite 10s linear;
+}
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+a:hover{
+    text-decoration: none;
+    /* color: yellow !important; */
+}
+.tl{
+    text-align: left;
+}
+.tr{
+    text-align: right;
+}
+.tc{
+    text-align: center;
+}
+.di{
+    display: inline;
+}
+.dib{
+    display: inline-block;
+}
+.fr{
+    float: right;
+}
+
+.mt{
+    margin-top:10px;
+}
+.fb{
+    font-weight: bold;
+}
+
+.ltn{
+    list-style-type:none;
+    padding-left: 0;
+}

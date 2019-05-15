@@ -1,0 +1,61 @@
+<template>
+    <div>
+        <div>
+            <Mycarousel></Mycarousel>
+        </div>
+        <div class="container my-4">
+            <b-alert show class="clearfix"><span class="dib py-1 font-weight-bold">Deal of the Day</span> <b-button class="fr di" variant="danger">Show All</b-button></b-alert>
+            <b-container class="tc">
+                <b-row>
+                    <b-col v-for="product in dealProducts" v-bind:key="product.id">
+                        <Tile v-bind:product="product"></Tile>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </div>
+        <div class="container mt">
+            <b-alert variant="success" show class="clearfix"><span class="dib py-1 font-weight-bold">Low-cost items</span> <b-button class="fr di" variant="danger">Show All</b-button></b-alert>
+            <b-container class="tc">
+                <b-row>
+                    <b-col v-for="product in lowCostProducts" v-bind:key="product.id">
+                        <Tile v-bind:product="product"></Tile>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </div>
+    </div>
+</template>
+
+<script>
+import Mycarousel from './common/MyCarousel'
+import Tile from './common/Tile'
+import dealService from './service/DealProductsService'
+import lowCostProductService from './service/LowCostProductService'
+export default {
+  name: 'Home',
+  components: {
+    Mycarousel,
+    Tile
+  },
+  data () {
+    return {
+      dealProducts: [],
+      lowCostProducts: []
+    }
+  },
+  mounted () {
+    this.getDeals()
+    this.getLowCost()
+  },
+  methods: {
+    async getDeals () {
+      const response = await dealService.getDeals()
+      this.dealProducts = response.data
+    },
+    async getLowCost () {
+      const response = await lowCostProductService.getLowCost()
+      this.lowCostProducts = response.data
+    }
+  }
+}
+</script>
