@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Topnav from './components/common/Topnav'
-import Bottomnav from './components/common/Bottomnav'
+import Topnav from '@/components/common/Topnav'
+import Bottomnav from '@/components/common/Bottomnav'
 export default {
   name: 'App',
   components: {
@@ -54,7 +54,7 @@ export default {
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }

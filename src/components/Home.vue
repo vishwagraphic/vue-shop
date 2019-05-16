@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Mycarousel from './common/MyCarousel'
-import Tile from './common/Tile'
+import Mycarousel from './common/MyCarousel.vue'
+import Tile from './common/Tile.vue'
 import dealService from './service/DealProductsService'
 import lowCostProductService from './service/LowCostProductService'
 export default {
