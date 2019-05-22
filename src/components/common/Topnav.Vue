@@ -1,7 +1,8 @@
 <template>
     <b-navbar toggleable="lg" fixed="top"  type="dark" v-bind:sticky="true" variant="danger">
         <router-link to="/">
-            <b-navbar-brand><img class="logo-img" src="../../assets/logo.png" height=40 /> <strong class="logo" style="color:yellow">VUE-SHOPPING</strong></b-navbar-brand>
+            <b-navbar-brand href="#"><img class="logo-img" src="../../assets/logo.png" height=40 />
+            <strong class="logo" style="color:yellow"><router-link to="/" style="color:yellow">VUE-SHOPPING</router-link></strong></b-navbar-brand>
         </router-link>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>

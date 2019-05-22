@@ -13,6 +13,14 @@ a:hover{
     text-decoration: none;
     /* color: yellow !important; */
 }
+.pointer{
+    cursor: pointer;
+}
+.hover{
+    &:hover{
+        color: #0069d9;
+    }
+}
 .tl{
     text-align: left;
 }
@@ -31,6 +39,7 @@ a:hover{
 .fr{
     float: right;
 }
+
 
 .mt{
     margin-top:10px;

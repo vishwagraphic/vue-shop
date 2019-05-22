@@ -22,7 +22,7 @@ export default new Router({
       component: About
     },
     {
-      path: '/product',
+      path: '/product/:id',
       name: 'product',
       component: Product
     },

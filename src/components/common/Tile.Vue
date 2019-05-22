@@ -1,19 +1,19 @@
 <template>
     <b-card class="mb-2">
-        <p class="img-container" style="height:130px; width: 190px">
-            <img v-bind:src="product.imageurls" height="100%" width="auto" alt="image" />
+        <p class="img-container pointer" style="height:130px; width: 190px" @click="onClick">
+          <img v-bind:src="product.imageurls" height="100%" width="auto" alt="image" />
         </p>
         <p class="my-2 d-block text-left font-weight-bold text-danger">
-            {{product.brand}}
+          {{product.brand}}
         </p>
         <b-card-text class="tl">
            <ul class="ltn">
-               <li class="fb" style="height:80px; line-height:20px; overflow-y:hidden"> {{product.name}} </li>
+               <li class="fb pointer hover" style="height:80px; line-height:20px; overflow-y:hidden" @click="onClick"> {{product.name}} </li>
                <li><star-rating v-model="product.rating" v-bind:star-size=15></star-rating></li>
                <li>${{product.prices_amountmin}}</li>
            </ul>
         </b-card-text>
-        <b-button variant="primary"><router-link to="/product" class="text-white">Add to cart</router-link></b-button>
+        <b-button variant="primary">Add to cart</b-button>
     </b-card>
 </template>
 <script>
@@ -34,6 +34,10 @@ export default {
           product.imageurls = imgArr[i]
         }
       }
+    },
+    onClick (evt) {
+      evt.preventDefault()
+      this.$router.push('/product/' + this.product.productid)
     }
   },
   components: {
