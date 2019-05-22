@@ -1,7 +1,7 @@
 <template>
     <b-navbar toggleable="lg" fixed="top"  type="dark" v-bind:sticky="true" variant="danger">
         <router-link to="/">
-            <b-navbar-brand href="#"><img class="logo-img" src="../../assets/logo.png" height=40 />
+            <b-navbar-brand href="#"><img class="logo-img" src="@/assets/logo.png" height=40 />
             <strong class="logo" style="color:yellow"><router-link to="/" style="color:yellow">VUE-SHOPPING</router-link></strong></b-navbar-brand>
         </router-link>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -22,7 +22,12 @@
                     <b-dropdown-item><router-link to="/profile" class="text-dark">Profile</router-link></b-dropdown-item>
                     <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown>
-                <b-nav-item href="#"><img src="../../assets/cart-icon.png" height="25" /></b-nav-item>
+                <b-nav-item href="#">
+                    <router-link to="/cart" class="text-white">
+                        <span class="cart-count">{{$parent.cart.count}}</span>
+                        <img src="@/assets/cart-icon.png" height="25" />
+                    </router-link>
+                </b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>

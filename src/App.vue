@@ -23,6 +23,9 @@ export default {
         name: localStorage.username || '',
         id: localStorage.id || '',
         email: localStorage.email || ''
+      },
+      cart: {
+        count: 0
       }
     }
   },
