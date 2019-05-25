@@ -16,7 +16,6 @@ export default {
     Bottomnav
   },
   data () {
-    console.log(localStorage)
     return {
       signin: false,
       user: {
@@ -25,7 +24,8 @@ export default {
         email: localStorage.email || ''
       },
       cart: {
-        count: 0
+        count: localStorage.getItem('cartCount') || 0,
+        idArr: []
       }
     }
   },
@@ -38,6 +38,8 @@ export default {
     if (localStorage.username) {
       this.signin = true
       this.$refs.childComponent.setValue(this.user.name)
+      this.cart.idArr = JSON.parse(localStorage.getItem('cartArr')) || []
+      console.log(this.cart.idArr)
     } else {
       this.signin = false
       this.$refs.childComponent.setValue('')
@@ -49,6 +51,13 @@ export default {
       this.user.id = userData.id
       this.user.email = userData.email
       this.$refs.childComponent.setValue(userData.name)
+    },
+    cartDetails (count, id) {
+      console.log('Callleddddddd ')
+      this.cart.count = Number(this.cart.count) + Number(count)
+      this.cart.idArr.push(parseInt(id))
+      localStorage.setItem('cartCount', this.cart.count)
+      localStorage.setItem('cartArr', JSON.stringify(this.cart.idArr))
     }
   }
 }

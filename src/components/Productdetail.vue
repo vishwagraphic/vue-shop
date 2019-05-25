@@ -24,7 +24,8 @@
             <p v-if="product.prices_availability">{{product.prices_availability}}</p>
             <p v-else>Out of Stock</p>
             <p>Qty </p>
-            <b-button block variant="primary" @click="onCartClick">Add to cart</b-button>
+            {{product.productid}}
+            <b-button block variant="primary" @click="onCartClick(1, product.productid)">Add to cart</b-button>
             <b-button block variant="danger">Buy now</b-button><br />
             <p>Sold by {{product.brand}}</p>
             <p>Item arrives in packaging that reveals what's inside.</p>
@@ -71,8 +72,8 @@ export default {
       result = result.toDateString()
       return result
     },
-    onCartClick () {
-      this.$parent.cart.count = this.$parent.cart.count + 1
+    onCartClick (count, id) {
+      this.$parent.cartDetails(count, id)
     }
   },
   components: {

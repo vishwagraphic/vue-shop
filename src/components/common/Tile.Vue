@@ -13,7 +13,7 @@
                <li>${{product.prices_amountmin}}</li>
            </ul>
         </b-card-text>
-        <b-button variant="primary" @click="onCartClick">Add to cart</b-button>
+        <b-button variant="primary" @click="onCartClick(1, product.productid)">Add to cart</b-button>
     </b-card>
 </template>
 <script>
@@ -39,8 +39,8 @@ export default {
       evt.preventDefault()
       this.$router.push('/product/' + this.product.productid)
     },
-    onCartClick () {
-      this.$parent.$parent.cart.count = this.$parent.$parent.cart.count + 1
+    onCartClick (count, id) {
+      this.$parent.$parent.cartDetails(count, id)
     }
   },
   components: {

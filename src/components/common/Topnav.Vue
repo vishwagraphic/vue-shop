@@ -38,7 +38,8 @@ export default {
   props: ['signin'],
   data () {
     return {
-      shortname: ''
+      shortname: '',
+      cartCnt: ''
     }
   },
   methods: {
@@ -47,6 +48,7 @@ export default {
       this.$parent.user.id = ''
       this.$parent.user.name = ''
       this.$parent.user.email = ''
+      this.$parent.cart.count = 0
       this.$parent.signin = false
       this.$router.push('/')
     },
