@@ -37,10 +37,18 @@ export default {
   },
   methods: {
     async getProduct () {
-      console.log(this.$parent.cart.idArr)
       // if (this.$parent.cart.idArr !== '') {
       const response = await CartService.GetCartProducts(JSON.parse(localStorage.getItem('cartArr')))
       this.cartProducts = response.data
+      this.cartProducts.forEach((product, i) => {
+        let imgArr = []
+        imgArr = product.imageurls.split(',')
+        for (let i = 0; i < imgArr.length; i++) {
+          if (imgArr[i].indexOf('bbystatic') > -1) {
+            product.imageurls = imgArr[i]
+          }
+        }
+      })
       // }
     }
   }
