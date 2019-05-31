@@ -9,6 +9,9 @@
 <script>
 import Topnav from '@/components/common/Topnav'
 import Bottomnav from '@/components/common/Bottomnav'
+import CartItemService from '@/components/service/CartItemService'
+
+/* import CartService from './components/service/CartService' */
 export default {
   name: 'App',
   components: {
@@ -38,8 +41,6 @@ export default {
     if (localStorage.username) {
       this.signin = true
       this.$refs.childComponent.setValue(this.user.name)
-      this.cart.idArr = JSON.parse(localStorage.getItem('cartArr')) || []
-      console.log(this.cart.idArr)
     } else {
       this.signin = false
       this.$refs.childComponent.setValue('')
@@ -50,12 +51,34 @@ export default {
       this.user.name = userData.name
       this.user.id = userData.id
       this.user.email = userData.email
+      this.getCartDetails()
       this.$refs.childComponent.setValue(userData.name)
     },
     cartDetails (count, id) {
-      console.log('Callleddddddd ')
       this.cart.count = Number(this.cart.count) + Number(count)
       this.cart.idArr.push(parseInt(id))
+      localStorage.setItem('cartCount', this.cart.count)
+      localStorage.setItem('cartArr', JSON.stringify(this.cart.idArr))
+      this.updateCart()
+    },
+    async updateCart () {
+      /* let dcount = {}
+      this.cart.idArr.forEach(function (i) { dcount[i] = (dcount[i] || 0) + 1 }) */
+      const response = await CartItemService.updateCart(this.user.email, this.cart.idArr, this.cart.count)
+      if (response.data === 0) {
+        this.postItemtoCart()
+      }
+    },
+    async postItemtoCart () {
+      /* let dcount = {}
+      this.cart.idArr.forEach(function (i) { dcount[i] = (dcount[i] || 0) + 1 }) */
+      const response = await CartItemService.postCart(this.user.email, this.cart.idArr, this.cart.count)
+      console.log(response)
+    },
+    async getCartDetails () {
+      const response = await CartItemService.getCartDetails(this.user.email)
+      this.cart.count = response.data[0].totalcount
+      this.cart.idArr = response.data[0].productids
       localStorage.setItem('cartCount', this.cart.count)
       localStorage.setItem('cartArr', JSON.stringify(this.cart.idArr))
     }

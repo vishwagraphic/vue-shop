@@ -16,6 +16,7 @@
                <div class="font-weight-bold text-danger">${{product.prices_amountmin}}</div>
           </b-col>
            <b-col>
+               <div class="">{{product.quantity}}</div>
                <div class="text-info">Delete</div>
           </b-col>
         </b-row>
@@ -41,6 +42,7 @@ export default {
       const response = await CartService.GetCartProducts(JSON.parse(localStorage.getItem('cartArr')))
       this.cartProducts = response.data
       this.cartProducts.forEach((product, i) => {
+        console.log(product)
         let imgArr = []
         imgArr = product.imageurls.split(',')
         for (let i = 0; i < imgArr.length; i++) {
