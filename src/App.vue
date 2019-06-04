@@ -27,8 +27,8 @@ export default {
         email: localStorage.email || ''
       },
       cart: {
-        count: localStorage.getItem('cartCount') || 0,
-        idArr: []
+        count: localStorage.cartCount || 0,
+        idArr: localStorage.idArr || {}
       }
     }
   },
@@ -56,29 +56,29 @@ export default {
     },
     cartDetails (count, id) {
       this.cart.count = Number(this.cart.count) + Number(count)
-      this.cart.idArr.push(parseInt(id))
+      let dcount = this.cart.idArr || {}
+      dcount[id] = (dcount[id] || 0) + 1
+      this.cart.idArr = dcount
       localStorage.setItem('cartCount', this.cart.count)
       localStorage.setItem('cartArr', JSON.stringify(this.cart.idArr))
       this.updateCart()
     },
     async updateCart () {
-      /* let dcount = {}
-      this.cart.idArr.forEach(function (i) { dcount[i] = (dcount[i] || 0) + 1 }) */
+      console.log(this.user.email)
       const response = await CartItemService.updateCart(this.user.email, this.cart.idArr, this.cart.count)
       if (response.data === 0) {
         this.postItemtoCart()
       }
     },
     async postItemtoCart () {
-      /* let dcount = {}
-      this.cart.idArr.forEach(function (i) { dcount[i] = (dcount[i] || 0) + 1 }) */
+      console.log(this.user.email)
       const response = await CartItemService.postCart(this.user.email, this.cart.idArr, this.cart.count)
       console.log(response)
     },
     async getCartDetails () {
       const response = await CartItemService.getCartDetails(this.user.email)
-      this.cart.count = response.data[0].totalcount
-      this.cart.idArr = response.data[0].productids
+      this.cart.count = response.data[0].totalcount || 0
+      this.cart.idArr = response.data[0].productids || {}
       localStorage.setItem('cartCount', this.cart.count)
       localStorage.setItem('cartArr', JSON.stringify(this.cart.idArr))
     }

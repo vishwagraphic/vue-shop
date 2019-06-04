@@ -49,6 +49,7 @@ export default {
       this.$parent.user.name = ''
       this.$parent.user.email = ''
       this.$parent.cart.count = 0
+      this.$parent.cart.idArr = {}
       this.$parent.signin = false
       this.$router.push('/')
     },
