@@ -1,8 +1,9 @@
 <template>
   <div class="container my-3">
     <b-alert variant="secondary" show class="clearfix"><span class="dib py-1 font-weight-bold">Your Cart Details</span></b-alert>
-      <b-container>
-        <b-row v-for="product in cartProducts" v-bind:key="product.productid">
+      <b-container v-for="product in cartProducts" v-bind:key="product.productid">
+          <CartTile v-bind:product="product"></CartTile>
+        <!-- <b-row v-for="product in cartProducts" v-bind:key="product.productid">
           <b-col cols="3">
             <img v-bind:src="product.imageurls" height="100px" width="auto" alt="image" />
           </b-col>
@@ -16,17 +17,23 @@
                <div class="font-weight-bold text-danger">${{product.prices_amountmin}}</div>
           </b-col>
            <b-col>
-               <div class="">{{product.quantity}}</div>
-               <div class="text-info">Delete</div>
+              <div class="">
+                <input type="text" v-model="product.quantity" :id="product.productid" @change="onInputChange" />
+              </div>
+              <div class="text-info">Delete</div>
           </b-col>
-        </b-row>
+        </b-row> -->
       </b-container>
   </div>
 </template>
 <script>
 import CartService from './service/CartService'
+import CartTile from './common/CartTile.vue'
 export default {
   name: 'Cart',
+  components: {
+    CartTile
+  },
   data () {
     return {
       ids: [],
@@ -37,6 +44,11 @@ export default {
     this.getProduct()
   },
   methods: {
+    /* onInputChange (evt) {
+      let qty = evt.target.value - product.quantity
+      let pid = evt.target.id
+      this.$parent.cartDetails(qty, pid)
+    }, */
     async getProduct () {
       // if (this.$parent.cart.idArr !== '') {
       const response = await CartService.GetCartProducts(JSON.parse(localStorage.getItem('cartArr')))

@@ -7,10 +7,13 @@ import Signin from '@/components/Signin'
 import Register from '@/components/Register'
 import Profile from '@/components/Profile'
 import Cart from '@/components/Cart'
+import Products from '@/components/Products'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  hash: false,
   routes: [
     {
       path: '/',
@@ -46,6 +49,11 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart
+    },
+    {
+      path: '/products',
+      name: 'Products',
+      component: Products
     }
   ]
 })

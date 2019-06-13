@@ -4,7 +4,9 @@
             <Mycarousel></Mycarousel>
         </div>
         <div class="container my-4">
-            <b-alert show class="clearfix"><span class="dib py-1 font-weight-bold">Deal of the Day</span> <b-button class="fr di" variant="danger">Show All</b-button></b-alert>
+            <b-alert show class="clearfix"><span class="dib py-1 font-weight-bold">Deal of the Day</span>
+                <b-button class="fr di" variant="danger"><router-link :to="{path:'/products', query: {type: 'dealProducts'}}" class="text-white">Show All</router-link></b-button>
+            </b-alert>
             <b-container class="tc">
                 <b-row>
                     <b-col v-for="product in dealProducts" v-bind:key="product.id">
@@ -14,7 +16,8 @@
             </b-container>
         </div>
         <div class="container mt">
-            <b-alert variant="success" show class="clearfix"><span class="dib py-1 font-weight-bold">Low-cost items</span> <b-button class="fr di" variant="danger">Show All</b-button></b-alert>
+            <b-alert variant="success" show class="clearfix"><span class="dib py-1 font-weight-bold">Low-cost items</span>
+            <b-button class="fr di" variant="danger"><router-link :to="{path:'/products', query: {type: 'lowCostProducts'}}" class="text-white">Show All</router-link></b-button></b-alert>
             <b-container class="tc">
                 <b-row>
                     <b-col v-for="product in lowCostProducts" v-bind:key="product.id">

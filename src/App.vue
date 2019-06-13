@@ -55,10 +55,14 @@ export default {
       this.$refs.childComponent.setValue(userData.name)
     },
     cartDetails (count, id) {
-      this.cart.count = Number(this.cart.count) + Number(count)
       let dcount = this.cart.idArr || {}
-      dcount[id] = (dcount[id] || 0) + 1
-      this.cart.idArr = dcount
+      let totalqty = count + dcount[id]
+      if (totalqty !== 0) {
+        dcount[id] = (dcount[id] || 0) + count
+      } else {
+        delete dcount[id]
+      }
+      this.cart.count = parseInt(this.cart.count) + parseInt(count)
       localStorage.setItem('cartCount', this.cart.count)
       localStorage.setItem('cartArr', JSON.stringify(this.cart.idArr))
       this.updateCart()
