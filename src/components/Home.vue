@@ -20,8 +20,8 @@
             <b-button class="fr di" variant="danger"><router-link :to="{path:'/products', query: {type: 'lowCostProducts'}}" class="text-white">Show All</router-link></b-button></b-alert>
             <b-container class="tc">
                 <b-row>
-                    <b-col v-for="product in lowCostProducts" v-bind:key="product.id">
-                        <Tile v-bind:product="product"></Tile>
+                    <b-col v-for="product in lowCostProducts" v-bind:key="product.id" >
+                        <Tile v-bind:product="product" ></Tile>
                     </b-col>
                 </b-row>
             </b-container>

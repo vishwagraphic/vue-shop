@@ -1,5 +1,5 @@
 <template>
-    <b-navbar style="height:40px" toggleable="sm" fixed="bottom" type="dark" v-bind:sticky="true" variant="danger">
+    <b-navbar variant="danger" fixed="bottom" type="dark" v-bind:sticky="true" class="sticky-bottom">
         <b-navbar-nav>
             <b-nav-item style="font-size:.85rem"> <span>©</span> Copyrights 2019. All rights reserved.</b-nav-item>
         </b-navbar-nav>

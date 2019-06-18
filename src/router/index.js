@@ -8,6 +8,7 @@ import Register from '@/components/Register'
 import Profile from '@/components/Profile'
 import Cart from '@/components/Cart'
 import Products from '@/components/Products'
+import Regconfirm from '@/components/Regconfirm'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/products',
       name: 'Products',
       component: Products
+    },
+    {
+      path: '/regconfirm',
+      name: 'Regconfirm',
+      component: Regconfirm
     }
   ]
 })

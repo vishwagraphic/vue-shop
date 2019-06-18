@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-5" style="width:300px; min-height:700px">
+  <div class="container my-5 form-width">
     <div v-if="signInErr" class="text-danger">You have entered invalid username or password</div>
     <b-form @submit="onSubmit" novalidate="">
       <b-form-group id="input-group-1" label="Email address:" label-for="input-1" description="">

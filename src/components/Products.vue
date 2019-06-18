@@ -1,6 +1,8 @@
 <template>
     <div>
         <div class="container my-4">
+            <b-alert show class="clearfix"><span class="dib py-1 font-weight-bold">{{title}}</span>
+            </b-alert>
             <b-container class="tc">
                 <b-row>
                     <b-col v-for="product in products" v-bind:key="product.id">
@@ -22,7 +24,8 @@ export default {
   },
   data () {
     return {
-      products: []
+      products: [],
+      title: ''
     }
   },
   mounted () {
@@ -31,7 +34,14 @@ export default {
   methods: {
     async getProducts (type) {
       const response = await productsService.getProducts(type)
-      this.products = response.data
+      const filteredResponse = response.data.filter((product, i) => {
+        if (product.type === undefined) {
+          return product
+        } else {
+            this.title = product.type
+        }
+      })
+      this.products = filteredResponse
     }
   }
 }

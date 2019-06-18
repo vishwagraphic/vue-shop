@@ -1,5 +1,8 @@
 <template>
-  <div class="container my-5" style="width:300px; min-height:700px">
+  <div class="container my-5 form-width" v-bind:class="{ loadingicon : isLoading }">
+    <div class="text-center loading">
+      <b-spinner label="Spinning"></b-spinner>
+    </div>
     <div v-if="registerErr" class="text-danger">User already exist</div>
     <b-form v-on:submit.prevent="onSubmit" novalidate="">
       <b-form-group id="input-group-1" label="Full Name:" label-for="name">
@@ -58,7 +61,8 @@ export default {
         email: '',
         password: ''
       },
-      registerErr: false
+      registerErr: false,
+      isLoading: false
     }
   },
   methods: {
@@ -66,6 +70,7 @@ export default {
       evt.preventDefault()
       this.$validator.validateAll().then(() => {
         if (this.errors.items.length < 1) {
+          this.isLoading = true
           this.registerCall()
         }
       }).catch(() => {
@@ -75,10 +80,12 @@ export default {
     async registerCall () {
       await registerService.registerUser(this.register)
         .then((response) => {
-          this.$router.push('/signin')
+          this.isLoading = false
+          this.$router.push('/regconfirm')
         })
         .catch((error) => {
           if (error.response.data === 'User already exist') {
+            this.isLoading = false
             this.registerErr = true
           }
         })
