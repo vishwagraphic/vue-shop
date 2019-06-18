@@ -38,7 +38,7 @@ export default {
         if (product.type === undefined) {
           return product
         } else {
-            this.title = product.type
+          this.title = product.type
         }
       })
       this.products = filteredResponse
