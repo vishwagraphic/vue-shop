@@ -51,19 +51,19 @@ export default {
     }
   },
   mounted () {
-    isLoading: true
+    this.isLoading = true
     this.getDeals()
     this.getLowCost()
   },
   methods: {
     async getDeals () {
       const response = await dealService.getDeals()
-      isLoading: false
+      this.sLoading = false
       this.dealProducts = response.data
     },
     async getLowCost () {
       const response = await lowCostProductService.getLowCost()
-      isLoading: false
+      this.isLoading = false
       this.lowCostProducts = response.data
     }
   }
