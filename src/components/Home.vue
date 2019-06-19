@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div v-bind:class="{ loadingicon : isLoading }">
+        <div class="text-center loading">
+            <b-spinner label="Spinning"></b-spinner>
+        </div>
         <div>
             <Mycarousel></Mycarousel>
         </div>
@@ -43,20 +46,24 @@ export default {
   data () {
     return {
       dealProducts: [],
-      lowCostProducts: []
+      lowCostProducts: [],
+      isLoading: false
     }
   },
   mounted () {
+    isLoading: true
     this.getDeals()
     this.getLowCost()
   },
   methods: {
     async getDeals () {
       const response = await dealService.getDeals()
+      isLoading: false
       this.dealProducts = response.data
     },
     async getLowCost () {
       const response = await lowCostProductService.getLowCost()
+      isLoading: false
       this.lowCostProducts = response.data
     }
   }

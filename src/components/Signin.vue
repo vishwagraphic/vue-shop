@@ -1,5 +1,8 @@
 <template>
-  <div class="container my-5 form-width">
+  <div class="container my-5 form-width" v-bind:class="{ loadingicon : isLoading }">
+    <div class="text-center loading">
+      <b-spinner label="Spinning"></b-spinner>
+    </div>
     <div v-if="signInErr" class="text-danger">You have entered invalid username or password</div>
     <b-form @submit="onSubmit" novalidate="">
       <b-form-group id="input-group-1" label="Email address:" label-for="input-1" description="">
@@ -50,7 +53,8 @@ export default {
         email: '',
         password: ''
       },
-      signInErr: false
+      signInErr: false,
+      isLoading: false
     }
   },
   methods: {
@@ -59,6 +63,7 @@ export default {
       console.log('test')
       this.$validator.validateAll().then(() => {
         if (this.errors.items.length < 1) {
+          this.isLoading = true
           this.postSign()
         }
       }).catch(() => {
@@ -68,6 +73,7 @@ export default {
     async postSign () {
       await SignInService.postSignIn(this.sign)
         .then(response => {
+          this.isLoading = false
           this.$parent.pushData(response.data)
           localStorage.setItem('userid', response.data.id)
           localStorage.setItem('username', response.data.name)
@@ -77,6 +83,7 @@ export default {
           this.signInErr = false
         })
         .catch(() => {
+          this.isLoading = false
           this.signInErr = true
         })
     }

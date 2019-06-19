@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="container my-4">
+        <div class="container my-4" v-bind:class="{ loadingicon : isLoading }">
+            <div class="text-center loading">
+                <b-spinner label="Spinning"></b-spinner>
+            </div>
             <b-alert show class="clearfix"><span class="dib py-1 font-weight-bold">{{title}}</span>
             </b-alert>
             <b-container class="tc">
@@ -25,10 +28,12 @@ export default {
   data () {
     return {
       products: [],
-      title: ''
+      title: '',
+      isLoading: false
     }
   },
   mounted () {
+    this.isLoading = true
     this.getProducts(this.$route.query.type)
   },
   methods: {
@@ -41,6 +46,7 @@ export default {
           this.title = product.type
         }
       })
+      this.isLoading = false
       this.products = filteredResponse
     }
   }

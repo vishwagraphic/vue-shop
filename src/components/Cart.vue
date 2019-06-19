@@ -1,5 +1,8 @@
 <template>
-  <div class="container my-3">
+  <div class="container my-3" v-bind:class="{ loadingicon : isLoading }">
+    <div class="text-center loading">
+      <b-spinner label="Spinning"></b-spinner>
+    </div>
     <b-alert variant="secondary" show class="clearfix"><span class="dib py-1 font-weight-bold">Your Cart Details</span></b-alert>
       <b-container v-for="product in cartProducts" v-bind:key="product.productid">
           <CartTile v-bind:product="product"></CartTile>
@@ -37,10 +40,12 @@ export default {
   data () {
     return {
       ids: [],
-      cartProducts: []
+      cartProducts: [],
+      isLoading: false
     }
   },
   mounted () {
+    this.isLoading = true
     this.getProduct()
   },
   methods: {
@@ -53,8 +58,8 @@ export default {
       // if (this.$parent.cart.idArr !== '') {
       const response = await CartService.GetCartProducts(JSON.parse(localStorage.getItem('cartArr')))
       this.cartProducts = response.data
+      this.isLoading = false
       this.cartProducts.forEach((product, i) => {
-        console.log(product)
         let imgArr = []
         imgArr = product.imageurls.split(',')
         for (let i = 0; i < imgArr.length; i++) {
