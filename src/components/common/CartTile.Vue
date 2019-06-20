@@ -1,11 +1,11 @@
 <template>
     <b-row class="border border-top-0 border-left-0 border-right-0 mb-4 pb-3">
         <b-col cols="3">
-            <img v-bind:src="product.imageurls" height="70px" width="auto" alt="image" />
+            <img v-bind:src="product.imageurls" height="70px" width="auto" alt="image" @click="onClick" />
         </b-col>
         <b-col cols="4">
             <ul class="ltn">
-               <li class="fb pointer hover" style="" > {{product.name}} </li>
+               <li class="fb pointer hover" style="" @click="onClick" > {{product.name}} </li>
                <li>{{product.brand}}</li>
            </ul>
         </b-col>
@@ -48,6 +48,10 @@ export default {
       this.$parent.$parent.cartDetails(qty, pid)
       this.$destroy()
       this.$el.parentNode.removeChild(this.$el)
+    },
+    onClick (evt) {
+      evt.preventDefault()
+      this.$router.push('/product/' + this.$props.product.productid)
     }
     /* onInputChange (evt) {
       let qty = parseInt(evt.target.value) - parseInt(this.$props.product.quantity)
