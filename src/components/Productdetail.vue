@@ -21,10 +21,9 @@
           <b-col>
             <p>Get it <strong>{{product.freeShipping}}</strong> if you choose FREE Shipping at checkout.</p>
             <p>Get it <strong>{{product.paidShipping}}</strong> if you order within 31 hrs 33 mins and choose paid shipping at checkout.</p>
-            <p v-if="product.prices_availability">{{product.prices_availability}}</p>
+            <!-- <p v-if="product.prices_availability">{{product.prices_availability}}</p>
             <p v-else>Out of Stock</p>
-            <p>Qty </p>
-            {{product.productid}}
+            <p>Qty </p> -->
             <b-button block variant="primary" @click="onCartClick(1, product.productid)">Add to cart</b-button>
             <b-button block variant="danger">Buy now</b-button><br />
             <p>Sold by {{product.brand}}</p>
