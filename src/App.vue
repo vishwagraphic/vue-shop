@@ -55,8 +55,9 @@ export default {
       this.$refs.childComponent.setValue(userData.name)
     },
     cartDetails (count, id) {
-      let dcount = this.cart.idArr || {}
+      let dcount = this.cart.idArr
       let totalqty = count + dcount[id]
+      console.log(dcount[id])
       if (totalqty !== 0) {
         dcount[id] = (dcount[id] || 0) + count
       } else {
