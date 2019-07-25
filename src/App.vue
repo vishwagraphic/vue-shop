@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="main">
     <Topnav v-bind:signin="signin" ref="childComponent"></Topnav>
-    <router-view />
+    <div class="mb-5">
+      <router-view />
+    </div>
     <Bottomnav></Bottomnav>
   </div>
 </template>
